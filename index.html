@@ -3,84 +3,689 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SN - Manutenzione</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Salvatore Napolano | Portfolio</title>
+
+    <!-- Tailwind CSS CDN -->
+    <link rel="stylesheet" href="output.css" />
+
+    <!-- Font Awesome CDN -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+
     <style>
-      body {
-        font-family: "JetBrains Mono", monospace;
+      /* Smooth scrolling per tutta la pagina */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Animazioni personalizzate */
+      .fade-in {
+        animation: fadeIn 1s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Animazione per il pallino verde lampeggiante */
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.2);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .status-pulse {
+        animation: pulse 2s infinite;
+      }
+
+      /* Gradient background */
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #3b82f6 0%,
+          #6366f1 50%,
+          #4338ca 100%
+        );
+      }
+
+      /* Hover effect per le card */
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .carousel-item {
+        flex-shrink: 0;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
   </head>
-  <body
-    class="bg-gray-950 text-gray-300 min-h-screen flex items-center justify-center p-6"
-  >
-    <div class="max-w-md w-full text-center space-y-8">
-      <!-- Icon -->
-      <i class="fa-solid fa-gears text-5xl text-orange-400"></i>
+  <body class="bg-gray-50 text-gray-800">
+    <!-- NAVBAR -->
+    <nav
+      class="fixed top-5 left-1/2 z-50 w-11/12 max-w-4xl -translate-x-1/2 rounded-full bg-white/90 shadow-lg backdrop-blur-sm"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-around">
+          <a href="#home" class="flex h-10 items-center">
+            <img
+              src="assets/images/logo.png"
+              alt="Logo"
+              class="h-full w-auto"
+            />
+          </a>
 
-      <!-- Title -->
-      <div class="space-y-2">
-        <h1 class="text-2xl font-semibold text-white">Sito in manutenzione</h1>
-        <p class="text-sm text-gray-500">Sto lavorando al portfolio.</p>
+          <!-- Centered menu with rounded full background -->
+          <div
+            class="bg-yellow hidden items-center space-x-8 rounded-full px-8 py-2 md:flex"
+          >
+            <a
+              href="#home"
+              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              >Home</a
+            >
+            <a
+              href="#skills"
+              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              >Progetti</a
+            >
+            <a
+              href="#education"
+              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              >Formazione</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              >Contatti</a
+            >
+          </div>
+
+          <!-- Status box with pulsing dot -->
+          <div
+            class="flex items-center space-x-2 rounded-full bg-green-100 px-4 py-2"
+          >
+            <div class="status-pulse h-3 w-3 rounded-full bg-green-500"></div>
+            <span class="text-sm font-medium text-green-800"
+              >Disponibile adesso</span
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="flex min-h-screen items-center bg-gray-100">
+      <div class="fade-in container mx-auto px-6">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <!-- Left side: Text content -->
+          <div>
+            <h1 class="mb-4 text-5xl font-bold text-gray-800 md:text-6xl">
+              Salvatore Napolano
+            </h1>
+            <h2 class="mb-6 text-2xl font-light text-blue-600 md:text-3xl">
+              Java Backend Developer
+            </h2>
+            <p class="mb-8 text-lg text-gray-600 md:text-xl">
+              Sviluppatore orientato alla creazione di soluzioni web complete e
+              scalabili, con una solida specializzazione nell'ecosistema Java e
+              Spring Boot.
+            </p>
+            <a
+              href="#contact"
+              class="inline-block transform rounded-full bg-blue-600 px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700"
+            >
+              Contattami
+            </a>
+          </div>
+
+          <!-- Right side: MacBook visualization -->
+          <div class="flex justify-center">
+            <div class="relative">
+              <img src="assets/images/notebook.png" alt="SN" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENZE -->
+    <section id="skills" class="overflow-hidden bg-white py-20">
+      <div class="container mx-auto mb-8 px-6">
+        <h2 class="text-center text-4xl font-bold text-gray-800">
+          Competenze Tecnologiche
+        </h2>
       </div>
 
-      <!-- Divider -->
-      <div class="border-t border-gray-800"></div>
-
-      <!-- Tech stack -->
-      <div class="flex justify-center flex-wrap gap-2 text-xs text-gray-500">
-        <span><i class="fa-brands fa-java mr-1 text-orange-400"></i>Java</span>
-        <span class="text-gray-700">·</span>
-        <span
-          ><i class="fa-solid fa-leaf mr-1 text-green-500"></i>Spring Boot</span
-        >
-        <span class="text-gray-700">·</span>
-        <span
-          ><i class="fa-brands fa-docker mr-1 text-blue-400"></i>Docker</span
-        >
-        <span class="text-gray-700">·</span>
-        <span
-          ><i class="fa-solid fa-database mr-1 text-purple-400"></i>MySQL</span
-        >
+      <!-- Tech logos carousel -->
+      <div class="carousel-container w-full py-10">
+        <div class="carousel flex items-center justify-center gap-2">
+          <!-- First set - Java -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fab fa-java" style="color: #007396"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">Java</p>
+            </div>
+          </div>
+          <!-- Spring Boot (represented by Leaf) -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fas fa-leaf" style="color: #6db33f"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">Spring Boot</p>
+            </div>
+          </div>
+          <!-- MySQL (Database) -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fas fa-database" style="color: #4479a1"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">MySQL</p>
+            </div>
+          </div>
+          <!-- Git -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fab fa-git-alt" style="color: #f05032"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">Git</p>
+            </div>
+          </div>
+          <!-- Docker -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fab fa-docker" style="color: #2496ed"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">Docker</p>
+            </div>
+          </div>
+          <!-- REST API -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fas fa-plug" style="color: #764abc"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">REST API</p>
+            </div>
+          </div>
+          <!-- JUnit -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fas fa-vial" style="color: #25a162"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">JUnit</p>
+            </div>
+          </div>
+          <!-- HTML 5 -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fa-brands fa-html5 text-orange-500"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">HTML 5</p>
+            </div>
+          </div>
+          <!-- CSS -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fa-brands fa-css3-alt text-blue-700"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">CSS</p>
+            </div>
+          </div>
+          <!-- JAVASCRIPT -->
+          <div class="carousel-item text-center">
+            <div class="flex flex-col items-center">
+              <div class="mb-2 text-7xl">
+                <i class="fa-brands fa-js text-yellow-400"></i>
+              </div>
+              <p class="text-sm font-semibold text-gray-700">Javascript</p>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <!-- Divider -->
-      <div class="border-t border-gray-800"></div>
+    <!-- PROGETTI -->
+    <section id="projects" class="bg-gray-50 py-20">
+      <div class="container mx-auto px-6">
+        <h2 class="mb-12 text-center text-4xl font-bold text-gray-800">
+          Progetti Recenti
+        </h2>
 
-      <!-- Contact links -->
-      <div class="flex justify-center gap-6 text-gray-500">
-        <a
-          href="mailto:salvatorenapolanoprog@gmail.com"
-          class="hover:text-white transition-colors"
-          title="Email"
-        >
-          <i class="fa-solid fa-envelope text-xl"></i>
-        </a>
-        <a
-          href="https://github.com/salvatorenapolano"
-          target="_blank"
-          class="hover:text-white transition-colors"
-          title="GitHub"
-        >
-          <i class="fa-brands fa-github text-xl"></i>
-        </a>
-        <a
-          href="https://linkedin.com/in/salvatore-napolano/"
-          target="_blank"
-          class="hover:text-white transition-colors"
-          title="LinkedIn"
-        >
-          <i class="fa-brands fa-linkedin text-xl"></i>
-        </a>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Progetto 1 -->
+          <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
+            <div class="p-6">
+              <div class="mb-4 flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-800">
+                  E-Commerce API
+                </h3>
+                <a href="#" class="text-gray-600 hover:text-blue-600">
+                  <i class="fab fa-github text-xl"></i>
+                </a>
+              </div>
+              <p class="mb-4 text-gray-600">
+                API RESTful per piattaforma e-commerce con gestione prodotti,
+                ordini e utenti. Implementata con Spring Boot e sicurezza JWT.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600"
+                  >Java</span
+                >
+                <span
+                  class="rounded-full bg-green-100 px-3 py-1 text-sm text-green-600"
+                  >Spring Boot</span
+                >
+                <span
+                  class="rounded-full bg-purple-100 px-3 py-1 text-sm text-purple-600"
+                  >MySQL</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Progetto 2 -->
+          <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
+            <div class="p-6">
+              <div class="mb-4 flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-800">
+                  Task Manager
+                </h3>
+                <a href="#" class="text-gray-600 hover:text-blue-600">
+                  <i class="fab fa-github text-xl"></i>
+                </a>
+              </div>
+              <p class="mb-4 text-gray-600">
+                Applicazione di gestione task con autenticazione utente,
+                categorie e notifiche. Backend completo con API REST.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600"
+                  >Java</span
+                >
+                <span
+                  class="rounded-full bg-green-100 px-3 py-1 text-sm text-green-600"
+                  >Spring Security</span
+                >
+                <span
+                  class="rounded-full bg-orange-100 px-3 py-1 text-sm text-orange-600"
+                  >Docker</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Progetto 3 -->
+          <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
+            <div class="p-6">
+              <div class="mb-4 flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-800">
+                  Weather Dashboard
+                </h3>
+                <a href="#" class="text-gray-600 hover:text-blue-600">
+                  <i class="fab fa-github text-xl"></i>
+                </a>
+              </div>
+              <p class="mb-4 text-gray-600">
+                Microservizio per dati meteorologici con integrazione API
+                esterne e cache Redis per performance.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600"
+                  >Java</span
+                >
+                <span
+                  class="rounded-full bg-red-100 px-3 py-1 text-sm text-red-600"
+                  >Redis</span
+                >
+                <span
+                  class="rounded-full bg-purple-100 px-3 py-1 text-sm text-purple-600"
+                  >REST</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- FORMAZIONE -->
+    <section id="education" class="bg-white py-20">
+      <div class="container mx-auto px-6">
+        <h2 class="mb-12 text-center text-4xl font-bold text-gray-800">
+          Formazione
+        </h2>
+
+        <div class="mx-auto max-w-4xl">
+          <div class="space-y-8">
+            <!-- Formazione 1 -->
+            <div
+              class="card-hover flex items-start space-x-4 rounded-lg bg-gray-50 p-6"
+            >
+              <div class="shrink-0">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-400 text-white"
+                >
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800">
+                  Diploma in Informatica
+                </h3>
+                <a
+                  href="https://www.itiferraris.edu.it/"
+                  class="mt-1 font-medium text-blue-600 underline"
+                >
+                  ITIS Galileo Ferraris
+                </a>
+                <p class="mt-1 font-medium text-gray-800">
+                  <i class="fa-solid fa-location-dot text-red-500"></i> Napoli
+                  (NA)
+                </p>
+                <p class="mt-2 text-gray-600">2018</p>
+                <p class="text-gray-600">
+                  Durante gli studi ho progettato applicazioni informatiche
+                  utilizzando diversi linguaggi di programmazione, a gestire
+                  basi di dati complesse e a configurare infrastrutture di rete
+                  sicure per la trasmissione delle informazioni.
+                </p>
+              </div>
+            </div>
+
+            <!-- Formazione 2 -->
+            <div
+              class="card-hover flex items-start space-x-4 rounded-lg bg-gray-50 p-6"
+            >
+              <div class="shrink-0">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white"
+                >
+                  <i class="fas fa-laptop-code"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800">
+                  Qualifica EQF5 - Tecnico della programmazione
+                </h3>
+                <a
+                  href="https://www.skillfactory.it/"
+                  class="mt-1 font-medium text-blue-600 underline"
+                >
+                  Skill Factory
+                </a>
+                <p class="mt-1 font-medium text-gray-800">
+                  <i class="fa-solid fa-location-dot text-red-500"></i> Napoli
+                  (NA)
+                </p>
+                <p class="mt-2 text-gray-600">2025</p>
+                <p class="text-gray-600">
+                  Progettazione, codifica, test e installazione di applicazioni
+                  in Java, garantendo il rispetto delle specifiche tecniche.
+                </p>
+              </div>
+            </div>
+
+            <!-- Formazione 3 -->
+            <div
+              class="card-hover flex items-start space-x-4 rounded-lg bg-gray-50 p-6"
+            >
+              <div class="shrink-0">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-white"
+                >
+                  <i class="fas fa-certificate"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800">
+                  Corso Spring Framework (FormaTemp)
+                </h3>
+                <a
+                  href="https://www.skillfactory.it/"
+                  class="mt-1 font-medium text-blue-600 underline"
+                >
+                  Skill Factory
+                </a>
+                <p class="mt-1 font-medium text-gray-800">
+                  <i class="fa-solid fa-location-dot text-red-500"></i> Napoli
+                  (NA)
+                </p>
+                <p class="mt-2 text-gray-600">2026</p>
+                <p class="text-gray-600">
+                  Progettazione di API REST con Spring e Spring Boot, gestione
+                  ORM per l'integrazione database e ottimizzazione
+                  dell'architettura applicativa.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CONTATTI -->
+    <section id="contact" class="gradient-bg py-20">
+      <div class="container mx-auto px-6">
+        <h2 class="mb-12 text-center text-4xl font-bold text-white">
+          Contattami
+        </h2>
+
+        <!-- Cards orizzontali -->
+        <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <!-- Email -->
+          <div
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+          >
+            <div
+              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+            >
+              <i class="fas fa-envelope text-2xl"></i>
+            </div>
+            <h4
+              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+            >
+              Email
+            </h4>
+            <p class="font-medium break-all text-white">
+              salvatorenapolano@duck.com
+            </p>
+            <a
+              href="mailto:salvatorenapolano@duck.com"
+              class="mt-3 inline-block text-xs text-blue-200 transition-colors duration-200 hover:text-white"
+              >Scrivi una mail →</a
+            >
+          </div>
+
+          <!-- Telefono -->
+          <div
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+          >
+            <div
+              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+            >
+              <i class="fas fa-phone text-2xl"></i>
+            </div>
+            <h4
+              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+            >
+              Telefono
+            </h4>
+            <p class="font-medium text-white">+39 ######</p>
+            <a
+              href="tel:+39#####"
+              class="mt-3 inline-block text-xs text-blue-200 transition-colors duration-200 hover:text-white"
+              >Chiama ora →</a
+            >
+          </div>
+
+          <!-- Posizione -->
+          <div
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+          >
+            <div
+              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+            >
+              <i class="fas fa-map-marker-alt text-2xl"></i>
+            </div>
+            <h4
+              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+            >
+              Posizione
+            </h4>
+            <p class="font-medium text-white">Napoli, Campania</p>
+            <p class="text-sm text-blue-100">Italia</p>
+          </div>
+
+          <!-- Curriculum -->
+          <div
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+          >
+            <div
+              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+            >
+              <i class="fas fa-file-pdf text-2xl"></i>
+            </div>
+            <h4
+              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+            >
+              Curriculum
+            </h4>
+            <p class="font-medium text-white">CV aggiornato</p>
+            <a
+              href="assets/cv.pdf"
+              download
+              class="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-blue-700 transition-colors duration-200 hover:bg-blue-100"
+            >
+              <i class="fas fa-download"></i> Scarica CV
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 py-10 text-white">
+      <div class="container mx-auto px-6 text-center">
+        <div class="mb-6 flex justify-center space-x-6">
+          <a
+            href="https://github.com/salvatorenapolano"
+            class="transform text-gray-400 transition-all duration-300 hover:scale-110 hover:text-white"
+          >
+            <i class="fab fa-github text-2xl"></i>
+          </a>
+          <a
+            href="https://linkedin.com/in/salvatore-napolano"
+            class="transform text-gray-400 transition-all duration-300 hover:scale-110 hover:text-white"
+          >
+            <i class="fab fa-linkedin text-2xl"></i>
+          </a>
+        </div>
+        <p class="text-sm text-gray-500">&copy; 2026 Salvatore Napolano</p>
+      </div>
+    </footer>
+
+    <!-- Script semplice per la navbar mobile -->
+    <script>
+      // Aggiunge effetto di fade-in durante lo scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
+          }
+        });
+      }, observerOptions);
+
+      // Rileva tutti gli elementi con card-hover
+      document.querySelectorAll(".card-hover").forEach((card) => {
+        observer.observe(card);
+      });
+
+      // Mobile menu toggle (semplice)
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      // Questo è un placeholder - in produzione aggiungerei un menu mobile completo
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener("click", () => {
+          alert("Menu mobile - da implementare per produzione");
+        });
+      }
+
+      // Aggiunge active state alla navbar basato sulla sezione corrente
+      window.addEventListener("scroll", () => {
+        const sections = ["home", "skills", "projects", "education", "contact"];
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        let current = "";
+        sections.forEach((sectionId) => {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= sectionTop - sectionHeight / 3) {
+              current = sectionId;
+            }
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("text-blue-600");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("text-blue-600");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
