@@ -3,11 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio di Salvatore Napolano - Java Backend Developer specializzato in Spring Boot, REST API e soluzioni web scalabili"
+    />
+    <meta property="og:title" content="Salvatore Napolano | Portfolio" />
+    <meta
+      property="og:description"
+      content="Java Backend Developer con specializzazione in Spring Boot e soluzioni web scalabili"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/logo.webp" />
+
     <title>Salvatore Napolano | Portfolio</title>
 
-    <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="output.css" />
-
+    <!-- TailwindCSS -->
+    <link rel="stylesheet" href="assets/css/output.css" />
     <!-- Font Awesome CDN -->
     <link
       rel="stylesheet"
@@ -89,14 +100,60 @@
 
       .carousel {
         overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
       }
-      
+
+      .carousel::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .carousel::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      .carousel::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+      }
+
       .carousel-item {
         flex-shrink: 0;
-        padding: 0 2rem;
+        padding: 0 1.25rem;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      @media (max-width: 768px) {
+        .carousel-item {
+          padding: 0 1rem;
+        }
+      }
+
+      /* Mobile menu styles */
+      .mobile-menu {
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .mobile-menu.active {
+        transform: translateX(0);
+      }
+
+      /* Disable animation on mobile for better performance */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .fade-in {
+          animation: none;
+        }
+
+        .card-hover {
+          transition: none;
+        }
       }
     </style>
   </head>
@@ -104,76 +161,157 @@
     <!-- NAVBAR -->
     <nav
       class="fixed top-5 left-1/2 z-50 w-11/12 max-w-4xl -translate-x-1/2 rounded-full bg-white/90 shadow-lg backdrop-blur-sm"
+      aria-label="Navigazione principale"
     >
-      <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center justify-around">
-          <a href="#home" class="flex h-10 items-center">
-            <img
-              src="assets/images/logo.png"
-              alt="Logo"
-              class="h-full w-auto"
-            />
-          </a>
+      <div class="container mx-auto px-5 py-3 md:px-6 md:py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo + Status mobile (sinistra) -->
+          <div class="flex items-center gap-4">
+            <a href="#home" class="flex h-10 items-center" aria-label="Home">
+              <img
+                src="assets/images/logo.webp"
+                alt="Logo di Salvatore Napolano"
+                class="h-full w-auto"
+                loading="lazy"
+              />
+            </a>
 
-          <!-- Centered menu with rounded full background -->
+            <!-- Status box mobile (affianco al logo, solo mobile) -->
+            <div
+              class="flex items-center space-x-1.5 rounded-full bg-green-100 px-3 py-2 md:hidden"
+            >
+              <div
+                class="status-pulse h-2.5 w-2.5 rounded-full bg-green-500"
+                aria-hidden="true"
+              ></div>
+              <span class="text-xs leading-none font-medium text-green-800"
+                >Disponibile adesso</span
+              >
+            </div>
+          </div>
+
+          <!-- Desktop menu -->
           <div
-            class="bg-yellow hidden items-center space-x-8 rounded-full px-8 py-2 md:flex"
+            class="bg-yellow hidden items-center space-x-6 rounded-full px-6 py-2 md:flex"
           >
             <a
               href="#home"
-              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
-              >Home</a
+              class="nav-link font-medium text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              aria-label="Vai alla Home"
             >
+              Home
+            </a>
             <a
               href="#skills"
-              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
-              >Progetti</a
+              class="nav-link font-medium text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              aria-label="Vai a Competenze"
             >
+              Competenze
+            </a>
             <a
               href="#education"
-              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
-              >Formazione</a
+              class="nav-link font-medium text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              aria-label="Vai a Formazione"
             >
+              Formazione
+            </a>
             <a
               href="#contact"
-              class="nav-link text-gray-700 transition-colors duration-300 hover:text-blue-600"
-              >Contatti</a
+              class="nav-link font-medium text-gray-700 transition-colors duration-300 hover:text-blue-600"
+              aria-label="Vai a Contatti"
             >
+              Contatti
+            </a>
           </div>
 
-          <!-- Status box with pulsing dot -->
+          <!-- Status box desktop -->
           <div
-            class="flex items-center space-x-2 rounded-full bg-green-100 px-4 py-2"
+            class="hidden items-center space-x-2 rounded-full bg-green-100 px-4 py-2 md:flex"
           >
-            <div class="status-pulse h-3 w-3 rounded-full bg-green-500"></div>
+            <div
+              class="status-pulse h-3 w-3 rounded-full bg-green-500"
+              aria-hidden="true"
+            ></div>
             <span class="text-sm font-medium text-green-800"
               >Disponibile adesso</span
             >
           </div>
+
+          <!-- Mobile menu button -->
+          <button
+            id="mobile-menu-btn"
+            class="rounded p-1 text-gray-700 hover:text-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none md:hidden"
+            aria-label="Apri menu mobile"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
         </div>
       </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div
+      id="mobile-menu"
+      class="mobile-menu fixed top-20 right-0 z-40 mt-0 h-[calc(100vh-5rem)] w-64 rounded-2xl bg-white shadow-xl md:hidden"
+    >
+      <div class="p-4">
+        <nav class="space-y-4">
+          <a
+            href="#home"
+            class="block py-2 text-lg font-medium text-gray-700 hover:text-blue-600"
+            aria-label="Vai alla Home"
+            >Home</a
+          >
+          <a
+            href="#skills"
+            class="block py-2 text-lg font-medium text-gray-700 hover:text-blue-600"
+            aria-label="Vai a Competenze"
+            >Competenze</a
+          >
+          <a
+            href="#education"
+            class="block py-2 text-lg font-medium text-gray-700 hover:text-blue-600"
+            aria-label="Vai a Formazione"
+            >Formazione</a
+          >
+          <a
+            href="#contact"
+            class="block py-2 text-lg font-medium text-gray-700 hover:text-blue-600"
+            aria-label="Vai a Contatti"
+            >Contatti</a
+          >
+        </nav>
+      </div>
+    </div>
+
     <!-- HERO SECTION -->
     <section id="home" class="flex min-h-screen items-center bg-gray-100">
-      <div class="fade-in container mx-auto px-6">
-        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div class="fade-in container mx-auto px-4 md:px-8">
+        <div
+          class="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-2"
+        >
           <!-- Left side: Text content -->
-          <div>
-            <h1 class="mb-4 text-5xl font-bold text-gray-800 md:text-6xl">
+          <div class="text-center lg:text-left">
+            <h1
+              class="mb-3 text-4xl font-bold text-gray-800 md:text-5xl lg:text-6xl"
+            >
               Salvatore Napolano
             </h1>
-            <h2 class="mb-6 text-2xl font-light text-blue-600 md:text-3xl">
+            <h2
+              class="mb-4 text-xl font-light text-blue-600 md:text-2xl lg:text-3xl"
+            >
               Java Backend Developer
             </h2>
-            <p class="mb-8 text-lg text-gray-600 md:text-xl">
+            <p class="mb-6 text-base text-gray-600 md:mb-8 md:text-lg">
               Sviluppatore orientato alla creazione di soluzioni web complete e
               scalabili, con una solida specializzazione nell'ecosistema Java e
               Spring Boot.
             </p>
             <a
               href="#contact"
-              class="inline-block transform rounded-full bg-blue-600 px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700"
+              class="inline-block transform rounded-full bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 md:px-8"
+              aria-label="Contattami"
             >
               Contattami
             </a>
@@ -182,7 +320,13 @@
           <!-- Right side: MacBook visualization -->
           <div class="flex justify-center">
             <div class="relative">
-              <img src="assets/images/notebook.png" alt="SN" />
+              <img
+                src="assets/images/notebook.webp"
+                alt="MacBook con iniziali SN"
+                fetchpriority="high"
+                loading="lazy"
+                class="w-full max-w-md"
+              />
             </div>
           </div>
         </div>
@@ -190,20 +334,23 @@
     </section>
 
     <!-- COMPETENZE -->
-    <section id="skills" class="overflow-hidden bg-white py-20">
-      <div class="container mx-auto mb-8 px-6">
-        <h2 class="text-center text-4xl font-bold text-gray-800">
+    <section id="skills" class="overflow-hidden bg-white py-16 md:py-20">
+      <div class="container mx-auto mb-6 px-4 md:mb-8 md:px-6">
+        <h2 class="text-center text-3xl font-bold text-gray-800 md:text-4xl">
           Competenze Tecnologiche
         </h2>
+        <p class="mt-2 text-center text-gray-600 sm:hidden md:text-lg">
+          ← Scorri per vedere tutte le tecnologie →
+        </p>
       </div>
 
       <!-- Tech logos carousel -->
-      <div class="carousel-container w-full py-10">
-        <div class="carousel flex items-center justify-center gap-2">
+      <div class="carousel-container w-full py-8 md:py-10">
+        <div class="carousel flex items-center justify-center gap-3 md:gap-4">
           <!-- First set - Java -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fab fa-java" style="color: #007396"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">Java</p>
@@ -212,7 +359,7 @@
           <!-- Spring Boot (represented by Leaf) -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fas fa-leaf" style="color: #6db33f"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">Spring Boot</p>
@@ -221,7 +368,7 @@
           <!-- MySQL (Database) -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fas fa-database" style="color: #4479a1"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">MySQL</p>
@@ -230,7 +377,7 @@
           <!-- Git -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fab fa-git-alt" style="color: #f05032"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">Git</p>
@@ -239,7 +386,7 @@
           <!-- Docker -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fab fa-docker" style="color: #2496ed"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">Docker</p>
@@ -248,7 +395,7 @@
           <!-- REST API -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fas fa-plug" style="color: #764abc"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">REST API</p>
@@ -257,7 +404,7 @@
           <!-- JUnit -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fas fa-vial" style="color: #25a162"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">JUnit</p>
@@ -266,7 +413,7 @@
           <!-- HTML 5 -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fa-brands fa-html5 text-orange-500"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">HTML 5</p>
@@ -275,7 +422,7 @@
           <!-- CSS -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fa-brands fa-css3-alt text-blue-700"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">CSS</p>
@@ -284,7 +431,7 @@
           <!-- JAVASCRIPT -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
-              <div class="mb-2 text-7xl">
+              <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
                 <i class="fa-brands fa-js text-yellow-400"></i>
               </div>
               <p class="text-sm font-semibold text-gray-700">Javascript</p>
@@ -295,39 +442,47 @@
     </section>
 
     <!-- PROGETTI -->
-    <section id="projects" class="bg-gray-50 py-20">
-      <div class="container mx-auto px-6">
-        <h2 class="mb-12 text-center text-4xl font-bold text-gray-800">
+    <section id="projects" class="bg-gray-50 py-16 md:py-20">
+      <div class="container mx-auto px-4 md:px-6">
+        <h2
+          class="mb-10 text-center text-3xl font-bold text-gray-800 md:mb-12 md:text-4xl"
+        >
           Progetti Recenti
         </h2>
 
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
+        >
           <!-- Progetto 1 -->
           <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
-            <div class="p-6">
-              <div class="mb-4 flex items-center justify-between">
-                <h3 class="text-xl font-semibold text-gray-800">
+            <div class="p-5 md:p-6">
+              <div class="mb-3 flex items-center justify-between md:mb-4">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
                   E-Commerce API
                 </h3>
-                <a href="#" class="text-gray-600 hover:text-blue-600">
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-blue-600"
+                  aria-label="GitHub Repository"
+                >
                   <i class="fab fa-github text-xl"></i>
                 </a>
               </div>
-              <p class="mb-4 text-gray-600">
+              <p class="mb-4 text-sm text-gray-600 md:text-base">
                 API RESTful per piattaforma e-commerce con gestione prodotti,
                 ordini e utenti. Implementata con Spring Boot e sicurezza JWT.
               </p>
               <div class="flex flex-wrap gap-2">
                 <span
-                  class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600"
+                  class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600 md:px-3 md:py-1 md:text-sm"
                   >Java</span
                 >
                 <span
-                  class="rounded-full bg-green-100 px-3 py-1 text-sm text-green-600"
+                  class="rounded-full bg-green-100 px-2 py-1 text-xs text-green-600 md:px-3 md:py-1 md:text-sm"
                   >Spring Boot</span
                 >
                 <span
-                  class="rounded-full bg-purple-100 px-3 py-1 text-sm text-purple-600"
+                  class="rounded-full bg-purple-100 px-2 py-1 text-xs text-purple-600 md:px-3 md:py-1 md:text-sm"
                   >MySQL</span
                 >
               </div>
@@ -336,30 +491,34 @@
 
           <!-- Progetto 2 -->
           <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
-            <div class="p-6">
-              <div class="mb-4 flex items-center justify-between">
-                <h3 class="text-xl font-semibold text-gray-800">
+            <div class="p-5 md:p-6">
+              <div class="mb-3 flex items-center justify-between md:mb-4">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
                   Task Manager
                 </h3>
-                <a href="#" class="text-gray-600 hover:text-blue-600">
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-blue-600"
+                  aria-label="GitHub Repository"
+                >
                   <i class="fab fa-github text-xl"></i>
                 </a>
               </div>
-              <p class="mb-4 text-gray-600">
+              <p class="mb-4 text-sm text-gray-600 md:text-base">
                 Applicazione di gestione task con autenticazione utente,
                 categorie e notifiche. Backend completo con API REST.
               </p>
               <div class="flex flex-wrap gap-2">
                 <span
-                  class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600"
+                  class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600 md:px-3 md:py-1 md:text-sm"
                   >Java</span
                 >
                 <span
-                  class="rounded-full bg-green-100 px-3 py-1 text-sm text-green-600"
+                  class="rounded-full bg-green-100 px-2 py-1 text-xs text-green-600 md:px-3 md:py-1 md:text-sm"
                   >Spring Security</span
                 >
                 <span
-                  class="rounded-full bg-orange-100 px-3 py-1 text-sm text-orange-600"
+                  class="rounded-full bg-orange-100 px-2 py-1 text-xs text-orange-600 md:px-3 md:py-1 md:text-sm"
                   >Docker</span
                 >
               </div>
@@ -368,30 +527,34 @@
 
           <!-- Progetto 3 -->
           <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
-            <div class="p-6">
-              <div class="mb-4 flex items-center justify-between">
-                <h3 class="text-xl font-semibold text-gray-800">
+            <div class="p-5 md:p-6">
+              <div class="mb-3 flex items-center justify-between md:mb-4">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
                   Weather Dashboard
                 </h3>
-                <a href="#" class="text-gray-600 hover:text-blue-600">
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-blue-600"
+                  aria-label="GitHub Repository"
+                >
                   <i class="fab fa-github text-xl"></i>
                 </a>
               </div>
-              <p class="mb-4 text-gray-600">
+              <p class="mb-4 text-sm text-gray-600 md:text-base">
                 Microservizio per dati meteorologici con integrazione API
                 esterne e cache Redis per performance.
               </p>
               <div class="flex flex-wrap gap-2">
                 <span
-                  class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600"
+                  class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600 md:px-3 md:py-1 md:text-sm"
                   >Java</span
                 >
                 <span
-                  class="rounded-full bg-red-100 px-3 py-1 text-sm text-red-600"
+                  class="rounded-full bg-red-100 px-2 py-1 text-xs text-red-600 md:px-3 md:py-1 md:text-sm"
                   >Redis</span
                 >
                 <span
-                  class="rounded-full bg-purple-100 px-3 py-1 text-sm text-purple-600"
+                  class="rounded-full bg-purple-100 px-2 py-1 text-xs text-purple-600 md:px-3 md:py-1 md:text-sm"
                   >REST</span
                 >
               </div>
@@ -402,17 +565,19 @@
     </section>
 
     <!-- FORMAZIONE -->
-    <section id="education" class="bg-white py-20">
-      <div class="container mx-auto px-6">
-        <h2 class="mb-12 text-center text-4xl font-bold text-gray-800">
+    <section id="education" class="bg-white py-16 md:py-20">
+      <div class="container mx-auto px-4 md:px-6">
+        <h2
+          class="mb-10 text-center text-3xl font-bold text-gray-800 md:mb-12 md:text-4xl"
+        >
           Formazione
         </h2>
 
         <div class="mx-auto max-w-4xl">
-          <div class="space-y-8">
+          <div class="space-y-6 md:space-y-8">
             <!-- Formazione 1 -->
             <div
-              class="card-hover flex items-start space-x-4 rounded-lg bg-gray-50 p-6"
+              class="card-hover flex flex-col items-start space-y-4 rounded-lg bg-gray-50 p-5 md:flex-row md:space-y-0 md:space-x-4 md:p-6"
             >
               <div class="shrink-0">
                 <div
@@ -422,21 +587,25 @@
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-semibold text-gray-800">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
                   Diploma in Informatica
                 </h3>
                 <a
                   href="https://www.itiferraris.edu.it/"
-                  class="mt-1 font-medium text-blue-600 underline"
+                  class="mt-1 font-medium text-blue-600 underline hover:text-blue-700"
+                  aria-label="Vai al sito ITIS Galileo Ferraris"
                 >
                   ITIS Galileo Ferraris
                 </a>
                 <p class="mt-1 font-medium text-gray-800">
-                  <i class="fa-solid fa-location-dot text-red-500"></i> Napoli
-                  (NA)
+                  <i
+                    class="fa-solid fa-location-dot text-red-500"
+                    aria-hidden="true"
+                  ></i>
+                  Napoli (NA)
                 </p>
-                <p class="mt-2 text-gray-600">2018</p>
-                <p class="text-gray-600">
+                <p class="font-medium text-gray-700">2025</p>
+                <p class="text-sm text-gray-600 md:text-base">
                   Durante gli studi ho progettato applicazioni informatiche
                   utilizzando diversi linguaggi di programmazione, a gestire
                   basi di dati complesse e a configurare infrastrutture di rete
@@ -447,31 +616,35 @@
 
             <!-- Formazione 2 -->
             <div
-              class="card-hover flex items-start space-x-4 rounded-lg bg-gray-50 p-6"
+              class="card-hover flex flex-col items-start space-y-4 rounded-lg bg-gray-50 p-5 md:flex-row md:space-y-0 md:space-x-4 md:p-6"
             >
               <div class="shrink-0">
                 <div
                   class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white"
                 >
-                  <i class="fas fa-laptop-code"></i>
+                  <i class="fas fa-laptop-code" aria-hidden="true"></i>
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-semibold text-gray-800">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
                   Qualifica EQF5 - Tecnico della programmazione
                 </h3>
                 <a
                   href="https://www.skillfactory.it/"
-                  class="mt-1 font-medium text-blue-600 underline"
+                  class="mt-1 font-medium text-blue-600 underline hover:text-blue-700"
+                  aria-label="Vai al sito Skill Factory"
                 >
                   Skill Factory
                 </a>
                 <p class="mt-1 font-medium text-gray-800">
-                  <i class="fa-solid fa-location-dot text-red-500"></i> Napoli
-                  (NA)
+                  <i
+                    class="fa-solid fa-location-dot text-red-500"
+                    aria-hidden="true"
+                  ></i>
+                  Napoli (NA)
                 </p>
-                <p class="mt-2 text-gray-600">2025</p>
-                <p class="text-gray-600">
+                <p class="font-medium text-gray-700">2025</p>
+                <p class="text-sm text-gray-600 md:text-base">
                   Progettazione, codifica, test e installazione di applicazioni
                   in Java, garantendo il rispetto delle specifiche tecniche.
                 </p>
@@ -480,31 +653,35 @@
 
             <!-- Formazione 3 -->
             <div
-              class="card-hover flex items-start space-x-4 rounded-lg bg-gray-50 p-6"
+              class="card-hover flex flex-col items-start space-y-4 rounded-lg bg-gray-50 p-5 md:flex-row md:space-y-0 md:space-x-4 md:p-6"
             >
               <div class="shrink-0">
                 <div
                   class="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-white"
                 >
-                  <i class="fas fa-certificate"></i>
+                  <i class="fas fa-certificate" aria-hidden="true"></i>
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-semibold text-gray-800">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
                   Corso Spring Framework (FormaTemp)
                 </h3>
                 <a
                   href="https://www.skillfactory.it/"
-                  class="mt-1 font-medium text-blue-600 underline"
+                  class="mt-1 font-medium text-blue-600 underline hover:text-blue-700"
+                  aria-label="Vai al sito Skill Factory"
                 >
                   Skill Factory
                 </a>
                 <p class="mt-1 font-medium text-gray-800">
-                  <i class="fa-solid fa-location-dot text-red-500"></i> Napoli
-                  (NA)
+                  <i
+                    class="fa-solid fa-location-dot text-red-500"
+                    aria-hidden="true"
+                  ></i>
+                  Napoli (NA)
                 </p>
-                <p class="mt-2 text-gray-600">2026</p>
-                <p class="text-gray-600">
+                <p class="font-medium text-gray-700">2026</p>
+                <p class="text-sm text-gray-600 md:text-base">
                   Progettazione di API REST con Spring e Spring Boot, gestione
                   ORM per l'integrazione database e ottimizzazione
                   dell'architettura applicativa.
@@ -515,100 +692,126 @@
         </div>
       </div>
     </section>
+
     <!-- CONTATTI -->
-    <section id="contact" class="gradient-bg py-20">
-      <div class="container mx-auto px-6">
-        <h2 class="mb-12 text-center text-4xl font-bold text-white">
+    <section id="contact" class="gradient-bg py-16 md:py-20">
+      <div class="container mx-auto px-4 md:px-6">
+        <h2
+          class="mb-10 text-center text-3xl font-bold text-white md:mb-12 md:text-4xl"
+        >
           Contattami
         </h2>
 
-        <!-- Cards orizzontali -->
-        <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <!-- Cards -->
+        <div
+          class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4"
+        >
           <!-- Email -->
           <div
-            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-5 text-center text-white backdrop-blur-sm md:p-6"
           >
             <div
-              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+              class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 md:mb-4 md:h-14 md:w-14"
             >
-              <i class="fas fa-envelope text-2xl"></i>
+              <i
+                class="fas fa-envelope text-xl md:text-2xl"
+                aria-hidden="true"
+              ></i>
             </div>
             <h4
-              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+              class="mb-1 text-xs font-semibold tracking-widest text-blue-200 uppercase md:text-sm"
             >
               Email
             </h4>
-            <p class="font-medium break-all text-white">
+            <p class="text-sm font-medium break-all text-white md:text-base">
               salvatorenapolano@duck.com
             </p>
             <a
               href="mailto:salvatorenapolano@duck.com"
-              class="mt-3 inline-block text-xs text-blue-200 transition-colors duration-200 hover:text-white"
+              class="mt-2 inline-block text-xs text-blue-200 transition-colors duration-200 hover:text-white md:mt-3"
+              aria-label="Scrivi una email"
               >Scrivi una mail →</a
             >
           </div>
 
           <!-- Telefono -->
           <div
-            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-5 text-center text-white backdrop-blur-sm md:p-6"
           >
             <div
-              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+              class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 md:mb-4 md:h-14 md:w-14"
             >
-              <i class="fas fa-phone text-2xl"></i>
+              <i
+                class="fas fa-phone text-xl md:text-2xl"
+                aria-hidden="true"
+              ></i>
             </div>
             <h4
-              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+              class="mb-1 text-xs font-semibold tracking-widest text-blue-200 uppercase md:text-sm"
             >
               Telefono
             </h4>
-            <p class="font-medium text-white">+39 ######</p>
+            <p class="text-sm font-medium text-white md:text-base">
+              +39 ######
+            </p>
             <a
               href="tel:+39#####"
-              class="mt-3 inline-block text-xs text-blue-200 transition-colors duration-200 hover:text-white"
+              class="mt-2 inline-block text-xs text-blue-200 transition-colors duration-200 hover:text-white md:mt-3"
+              aria-label="Chiama ora"
               >Chiama ora →</a
             >
           </div>
 
           <!-- Posizione -->
           <div
-            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-5 text-center text-white backdrop-blur-sm md:p-6"
           >
             <div
-              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+              class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 md:mb-4 md:h-14 md:w-14"
             >
-              <i class="fas fa-map-marker-alt text-2xl"></i>
+              <i
+                class="fas fa-map-marker-alt text-xl md:text-2xl"
+                aria-hidden="true"
+              ></i>
             </div>
             <h4
-              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+              class="mb-1 text-xs font-semibold tracking-widest text-blue-200 uppercase md:text-sm"
             >
               Posizione
             </h4>
-            <p class="font-medium text-white">Napoli, Campania</p>
-            <p class="text-sm text-blue-100">Italia</p>
+            <p class="text-sm font-medium text-white md:text-base">
+              Napoli, Campania
+            </p>
+            <p class="text-xs text-blue-100 md:text-sm">Italia</p>
           </div>
 
           <!-- Curriculum -->
           <div
-            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-6 text-center text-white backdrop-blur-sm"
+            class="card-hover rounded-2xl border border-white/20 bg-white/15 p-5 text-center text-white backdrop-blur-sm md:p-6"
           >
             <div
-              class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20"
+              class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 md:mb-4 md:h-14 md:w-14"
             >
-              <i class="fas fa-file-pdf text-2xl"></i>
+              <i
+                class="fas fa-file-pdf text-xl md:text-2xl"
+                aria-hidden="true"
+              ></i>
             </div>
             <h4
-              class="mb-1 text-sm font-semibold tracking-widest text-blue-200 uppercase"
+              class="mb-1 text-xs font-semibold tracking-widest text-blue-200 uppercase md:text-sm"
             >
               Curriculum
             </h4>
-            <p class="font-medium text-white">CV aggiornato</p>
+            <p class="text-sm font-medium text-white md:text-base">
+              CV aggiornato
+            </p>
             <a
               href="assets/cv.pdf"
               download
-              class="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-blue-700 transition-colors duration-200 hover:bg-blue-100"
+              class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-semibold text-blue-700 transition-colors duration-200 hover:bg-blue-100 md:mt-3 md:px-4"
+              aria-label="Scarica CV"
             >
-              <i class="fas fa-download"></i> Scarica CV
+              <i class="fas fa-download" aria-hidden="true"></i> Scarica CV
             </a>
           </div>
         </div>
@@ -617,19 +820,21 @@
 
     <!-- FOOTER -->
     <footer class="bg-gray-900 py-10 text-white">
-      <div class="container mx-auto px-6 text-center">
+      <div class="container mx-auto px-4 text-center md:px-6">
         <div class="mb-6 flex justify-center space-x-6">
           <a
             href="https://github.com/salvatorenapolano"
             class="transform text-gray-400 transition-all duration-300 hover:scale-110 hover:text-white"
+            aria-label="Profilo GitHub"
           >
-            <i class="fab fa-github text-2xl"></i>
+            <i class="fab fa-github text-2xl" aria-hidden="true"></i>
           </a>
           <a
             href="https://linkedin.com/in/salvatore-napolano"
             class="transform text-gray-400 transition-all duration-300 hover:scale-110 hover:text-white"
+            aria-label="Profilo LinkedIn"
           >
-            <i class="fab fa-linkedin text-2xl"></i>
+            <i class="fab fa-linkedin text-2xl" aria-hidden="true"></i>
           </a>
         </div>
         <p class="text-sm text-gray-500">&copy; 2026 Salvatore Napolano</p>
@@ -657,12 +862,25 @@
         observer.observe(card);
       });
 
-      // Mobile menu toggle (semplice)
+      // Mobile menu toggle
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      // Questo è un placeholder - in produzione aggiungerei un menu mobile completo
-      if (mobileMenuBtn) {
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      if (mobileMenuBtn && mobileMenu) {
+        // Open menu
         mobileMenuBtn.addEventListener("click", () => {
-          alert("Menu mobile - da implementare per produzione");
+          const isActive = mobileMenu.classList.toggle("active");
+
+          // aggiorna aria-expanded automaticamente
+          mobileMenuBtn.setAttribute("aria-expanded", isActive);
+        });
+
+        // Close menu when clicking on a link
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+            mobileMenuBtn.setAttribute("aria-expanded", "false");
+          });
         });
       }
 
