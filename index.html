@@ -18,7 +18,7 @@
     <title>Salvatore Napolano | Portfolio</title>
 
     <!-- TailwindCSS -->
-    <link rel="stylesheet" href="assets/css/output.css" />
+    <link rel="stylesheet" href="/src/assets/css/output.css" />
     <!-- Font Awesome CDN -->
     <link
       rel="stylesheet"
@@ -101,20 +101,6 @@
       .carousel {
         overflow-x: scroll;
         -webkit-overflow-scrolling: touch;
-      }
-
-      .carousel::-webkit-scrollbar {
-        height: 6px;
-      }
-
-      .carousel::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 10px;
-      }
-
-      .carousel::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 10px;
       }
 
       .carousel-item {
@@ -322,7 +308,7 @@
             <div class="relative">
               <img
                 src="assets/images/notebook.webp"
-                alt="MacBook con iniziali SN"
+                alt="MacBook"
                 fetchpriority="high"
                 loading="lazy"
                 class="w-full max-w-md"
@@ -347,7 +333,7 @@
       <!-- Tech logos carousel -->
       <div class="carousel-container w-full py-8 md:py-10">
         <div class="carousel flex items-center justify-center gap-3 md:gap-4">
-          <!-- First set - Java -->
+          <!-- Java -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
               <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
@@ -356,7 +342,7 @@
               <p class="text-sm font-semibold text-gray-700">Java</p>
             </div>
           </div>
-          <!-- Spring Boot (represented by Leaf) -->
+          <!-- Spring Boot -->
           <div class="carousel-item text-center">
             <div class="flex flex-col items-center">
               <div class="mb-2 text-5xl md:text-6xl lg:text-7xl">
@@ -449,114 +435,55 @@
         >
           Progetti Recenti
         </h2>
-
-        <div
-          class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
-        >
-          <!-- Progetto 1 -->
-          <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
+        <!-- <div class="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3"> -->
+        <div class="flex justify-center px-4">
+          <!-- Progetto -->
+          <div class="card-hover max-w-lg overflow-hidden rounded-lg shadow-lg">
             <div class="p-5 md:p-6">
-              <div class="mb-3 flex items-center justify-between md:mb-4">
+              <div class="mb-3 flex items-center md:mb-4">
                 <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
-                  E-Commerce API
+                  myStudent
                 </h3>
-                <a
-                  href="#"
-                  class="text-gray-600 hover:text-blue-600"
-                  aria-label="GitHub Repository"
-                >
-                  <i class="fab fa-github text-xl"></i>
-                </a>
               </div>
               <p class="mb-4 text-sm text-gray-600 md:text-base">
-                API RESTful per piattaforma e-commerce con gestione prodotti,
-                ordini e utenti. Implementata con Spring Boot e sicurezza JWT.
+                Applicazione web sviluppata con Spring Web e Spring Security che
+                permette la gestione di studenti, voti e assenze attraverso un
+                sistema di autenticazione con ruoli differenziati.
               </p>
-              <div class="flex flex-wrap gap-2">
-                <span
-                  class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600 md:px-3 md:py-1 md:text-sm"
-                  >Java</span
-                >
-                <span
-                  class="rounded-full bg-green-100 px-2 py-1 text-xs text-green-600 md:px-3 md:py-1 md:text-sm"
-                  >Spring Boot</span
-                >
-                <span
-                  class="rounded-full bg-purple-100 px-2 py-1 text-xs text-purple-600 md:px-3 md:py-1 md:text-sm"
-                  >MySQL</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Progetto 2 -->
-          <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
-            <div class="p-5 md:p-6">
-              <div class="mb-3 flex items-center justify-between md:mb-4">
-                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
-                  Task Manager
-                </h3>
+              <div class="flex flex-wrap justify-between gap-2">
+                <div>
+                  <span
+                    class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600 md:px-3 md:py-1 md:text-sm"
+                    >Java</span
+                  >
+                  <span
+                    class="rounded-full bg-green-100 px-2 py-1 text-xs text-green-600 md:px-3 md:py-1 md:text-sm"
+                    >Spring Boot</span
+                  >
+                  <span
+                    class="rounded-full bg-yellow-100 px-2 py-1 text-xs text-yellow-600 md:px-3 md:py-1 md:text-sm"
+                    >Thymeleaf</span
+                  >
+                </div>
                 <a
-                  href="#"
-                  class="text-gray-600 hover:text-blue-600"
-                  aria-label="GitHub Repository"
+                  href="https://github.com/salvatorenapolano/myStudent"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex cursor-pointer gap-3 rounded-full border-2 bg-gray-700 to-black px-3 py-1.5 font-semibold text-white duration-300 hover:border-gray-700"
                 >
-                  <i class="fab fa-github text-xl"></i>
+                  <svg
+                    viewBox="0 0 24 24"
+                    height="24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill="#FFFFFF"
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                    ></path>
+                  </svg>
+                  Github
                 </a>
-              </div>
-              <p class="mb-4 text-sm text-gray-600 md:text-base">
-                Applicazione di gestione task con autenticazione utente,
-                categorie e notifiche. Backend completo con API REST.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span
-                  class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600 md:px-3 md:py-1 md:text-sm"
-                  >Java</span
-                >
-                <span
-                  class="rounded-full bg-green-100 px-2 py-1 text-xs text-green-600 md:px-3 md:py-1 md:text-sm"
-                  >Spring Security</span
-                >
-                <span
-                  class="rounded-full bg-orange-100 px-2 py-1 text-xs text-orange-600 md:px-3 md:py-1 md:text-sm"
-                  >Docker</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Progetto 3 -->
-          <div class="card-hover overflow-hidden rounded-lg bg-white shadow-lg">
-            <div class="p-5 md:p-6">
-              <div class="mb-3 flex items-center justify-between md:mb-4">
-                <h3 class="text-lg font-semibold text-gray-800 md:text-xl">
-                  Weather Dashboard
-                </h3>
-                <a
-                  href="#"
-                  class="text-gray-600 hover:text-blue-600"
-                  aria-label="GitHub Repository"
-                >
-                  <i class="fab fa-github text-xl"></i>
-                </a>
-              </div>
-              <p class="mb-4 text-sm text-gray-600 md:text-base">
-                Microservizio per dati meteorologici con integrazione API
-                esterne e cache Redis per performance.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span
-                  class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600 md:px-3 md:py-1 md:text-sm"
-                  >Java</span
-                >
-                <span
-                  class="rounded-full bg-red-100 px-2 py-1 text-xs text-red-600 md:px-3 md:py-1 md:text-sm"
-                  >Redis</span
-                >
-                <span
-                  class="rounded-full bg-purple-100 px-2 py-1 text-xs text-purple-600 md:px-3 md:py-1 md:text-sm"
-                  >REST</span
-                >
               </div>
             </div>
           </div>
@@ -604,7 +531,7 @@
                   ></i>
                   Napoli (NA)
                 </p>
-                <p class="font-medium text-gray-700">2025</p>
+                <p class="font-medium text-gray-700">2018</p>
                 <p class="text-sm text-gray-600 md:text-base">
                   Durante gli studi ho progettato applicazioni informatiche
                   utilizzando diversi linguaggi di programmazione, a gestire
@@ -843,25 +770,6 @@
 
     <!-- Script semplice per la navbar mobile -->
     <script>
-      // Aggiunge effetto di fade-in durante lo scroll
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("fade-in");
-          }
-        });
-      }, observerOptions);
-
-      // Rileva tutti gli elementi con card-hover
-      document.querySelectorAll(".card-hover").forEach((card) => {
-        observer.observe(card);
-      });
-
       // Mobile menu toggle
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
       const mobileMenu = document.getElementById("mobile-menu");
